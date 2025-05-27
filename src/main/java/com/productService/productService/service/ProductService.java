@@ -73,10 +73,12 @@ public class ProductService {
         return ResponseEntity.ok(products);
     }
 
+
+    // this method use FeingClient
     public ResponseEntity<?> getProductById(Long id) {
         return productRepository.findById(id)
                 .map(ResponseEntity::ok)
-                .orElseThrow(() -> new ProductExceptions("Product not found with id: " + id));
+                .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
 
@@ -120,4 +122,14 @@ public class ProductService {
     }
 
 
+    // this methos used FeingClient
+    public ResponseEntity<?> subQuantity(Long id, int quantity) {
+        Product productQuantity = productRepository.findQuantityById(id);
+        if ((productQuantity.getQuantity() - quantity) >= 0) {
+            productQuantity.setQuantity(productQuantity.getQuantity() - quantity);
+            productRepository.save(productQuantity);
+            return ResponseEntity.ok().build();
+        }
+        throw new ProductExceptions("Insufficient quantity for product with id: " + id);
+    }
 }
