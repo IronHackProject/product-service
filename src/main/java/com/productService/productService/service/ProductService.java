@@ -122,14 +122,21 @@ public class ProductService {
     }
 
 
-    // this methos used FeingClient
+    // this method used FeingClient,
+    // it subtracts the quantity from the product and updates the product quantity
     public ResponseEntity<?> subQuantity(Long id, int quantity) {
         Product productQuantity = productRepository.findQuantityById(id);
-        if ((productQuantity.getQuantity() - quantity) >= 0) {
-            productQuantity.setQuantity(productQuantity.getQuantity() - quantity);
-            productRepository.save(productQuantity);
-            return ResponseEntity.ok().build();
+        productQuantity.setQuantity(productQuantity.getQuantity() - quantity);
+        productRepository.save(productQuantity);
+        return ResponseEntity.ok().build();
+    }
+
+    public boolean isProductAvailable(Long id, int quantity) {
+        Product productId = productRepository.findQuantityById(id);
+        if ((productId.getQuantity() - quantity) >= 0) {
+            return true;
+        } else {
+            throw new ProductExceptions("Insufficient quantity for product with id: " + id);
         }
-        throw new ProductExceptions("Insufficient quantity for product with id: " + id);
     }
 }

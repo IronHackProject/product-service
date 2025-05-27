@@ -50,6 +50,11 @@ public class ProductController {
         return productService.getProductById(id);
     }
 
+    @GetMapping("/find/{id}/{quantity}")
+    public boolean isProductAvailable(@PathVariable Long id, @PathVariable int quantity) {
+        return productService.isProductAvailable(id, quantity);
+    }
+
     // thismethod used FeingCleint
     // sub the quantity and update the product quantity
     @PatchMapping("/subQuantity/{id}/{quantity}")
