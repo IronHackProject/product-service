@@ -82,15 +82,15 @@ public class ProductService {
     }
 
 
-    public ResponseEntity<?> updateProduct(UpdateProductRequestDTO dto) {
+    public ResponseEntity<?> updateProduct(long id,UpdateProductRequestDTO dto) {
         if (isValidEnumValue(dto.getTypeProduct())) {
             throw new ProductExceptions("Invalid product type: " + dto.getTypeProduct());
         }
 
         TypeProductEnum typeProduct = TypeProductEnum.valueOf(dto.getTypeProduct().toUpperCase());
-        Optional<Product> productid = productRepository.findById(dto.getId());
+        Optional<Product> productid = productRepository.findById(id);
         if (productid.isEmpty()) {
-            throw new ProductExceptions("Product not found with id: " + dto.getId());
+            throw new ProductExceptions("Product not found with id: " + id);
         }
         return productid
                 .map(product -> {
@@ -102,7 +102,7 @@ public class ProductService {
                     productRepository.save(product);
                     return ResponseEntity.ok("Product updated successfully");
                 })
-                .orElseThrow(() -> new ProductExceptions("Product not found with id: " + dto.getId()));
+                .orElseThrow(() -> new ProductExceptions("Product not found with id: " + id));
     }
 
     public ResponseEntity<?> deleteProduct(@Valid DeleteProductRequestDTO dto) {

@@ -29,13 +29,13 @@ public class ProductController {
         return ResponseEntity.ok(productService.getAllProducts());
     }
 
-    @GetMapping("/find")
-    public ResponseEntity<?> getProductById(@RequestBody String typeProduct) {
+    @GetMapping("/find/{typeProduct}")
+    public ResponseEntity<?> getProductById(@PathVariable String typeProduct) {
         return productService.getProductByType(typeProduct);
     }
-    @PutMapping("/update")
-    public ResponseEntity<?> updateProduct(@RequestBody @Valid UpdateProductRequestDTO dto) {
-        return productService.updateProduct(dto);
+    @PutMapping("/update/{id}")
+    public ResponseEntity<?> updateProduct(@PathVariable long id,@RequestBody @Valid UpdateProductRequestDTO dto) {
+        return productService.updateProduct(id,dto);
     }
 
     @DeleteMapping("/delete")
