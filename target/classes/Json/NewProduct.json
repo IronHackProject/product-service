@@ -1,0 +1,142 @@
+[
+  {
+    "name": "Play Station 8",
+    "description": "Consola play 8",
+    "price": 529.99,
+    "quantity": 10,
+    "typeProduct": "ELECTRONICS"
+  },
+  {
+    "name": "Camiseta Oficial",
+    "description": "Camiseta del equipo 2025",
+    "price": 35.00,
+    "quantity": 50,
+    "typeProduct": "CLOTHING"
+  },
+  {
+    "name": "Microondas 900W",
+    "description": "Microondas compacto",
+    "price": 89.99,
+    "quantity": 20,
+    "typeProduct": "HOME_APPLIANCES"
+  },
+  {
+    "name": "Libro de Tácticas",
+    "description": "Estrategias de fútbol moderno",
+    "price": 19.99,
+    "quantity": 100,
+    "typeProduct": "BOOKS"
+  },
+  {
+    "name": "Muñeco del Capitán",
+    "description": "Juguete edición limitada",
+    "price": 14.99,
+    "quantity": 40,
+    "typeProduct": "TOYS"
+  },
+  {
+    "name": "Sofá Modular",
+    "description": "Sofá gris para salón grande",
+    "price": 799.99,
+    "quantity": 5,
+    "typeProduct": "FURNITURE"
+  },
+  {
+    "name": "Balón Oficial",
+    "description": "Balón temporada 2025",
+    "price": 39.99,
+    "quantity": 80,
+    "typeProduct": "SPORTS_EQUIPMENT"
+  },
+  {
+    "name": "Auriculares Inalámbricos",
+    "description": "Bluetooth con cancelación de ruido",
+    "price": 129.99,
+    "quantity": 25,
+    "typeProduct": "ELECTRONICS"
+  },
+  {
+    "name": "Sudadera Club",
+    "description": "Sudadera con capucha",
+    "price": 42.50,
+    "quantity": 60,
+    "typeProduct": "CLOTHING"
+  },
+  {
+    "name": "Aspiradora Inteligente",
+    "description": "Robot de limpieza Wi-Fi",
+    "price": 239.00,
+    "quantity": 15,
+    "typeProduct": "HOME_APPLIANCES"
+  },
+  {
+    "name": "Biografía del Entrenador",
+    "description": "Historia inspiradora",
+    "price": 22.99,
+    "quantity": 30,
+    "typeProduct": "BOOKS"
+  },
+  {
+    "name": "Set Lego Estadio",
+    "description": "Estadio del club en piezas",
+    "price": 89.90,
+    "quantity": 18,
+    "typeProduct": "TOYS"
+  },
+  {
+    "name": "Mesa Plegable",
+    "description": "Ideal para entrenadores",
+    "price": 59.99,
+    "quantity": 12,
+    "typeProduct": "FURNITURE"
+  },
+  {
+    "name": "Conos de Entrenamiento",
+    "description": "Set de 50 conos",
+    "price": 29.95,
+    "quantity": 100,
+    "typeProduct": "SPORTS_EQUIPMENT"
+  },
+  {
+    "name": "Tablet 10\"",
+    "description": "Pantalla grande, Android 14",
+    "price": 199.99,
+    "quantity": 22,
+    "typeProduct": "ELECTRONICS"
+  },
+  {
+    "name": "Pantalón Corto Oficial",
+    "description": "Uniforme de entrenamiento",
+    "price": 24.90,
+    "quantity": 70,
+    "typeProduct": "CLOTHING"
+  },
+  {
+    "name": "Plancha a Vapor",
+    "description": "Compacta y eficiente",
+    "price": 34.99,
+    "quantity": 35,
+    "typeProduct": "HOME_APPLIANCES"
+  },
+  {
+    "name": "Cuento Infantil del Club",
+    "description": "Historia para niños",
+    "price": 12.50,
+    "quantity": 40,
+    "typeProduct": "BOOKS"
+  },
+  {
+    "name": "Puzzle del Escudo",
+    "description": "Rompecabezas de 1000 piezas",
+    "price": 18.99,
+    "quantity": 28,
+    "typeProduct": "TOYS"
+  },
+  {
+    "name": "Banco para Vestuario",
+    "description": "Banco resistente de madera",
+    "price": 149.00,
+    "quantity": 7,
+    "typeProduct": "FURNITURE"
+  }
+]

@@ -13,6 +13,7 @@ import jakarta.persistence.EnumType;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
 
 
 import java.util.Arrays;
@@ -30,7 +31,7 @@ public class ProductService {
 
 
     public ResponseEntity<?> createdProduct(CreatedProductRequestDTO dto) {
-        if (isValidEnumValue(dto.getTypeProduct())) {
+        if (!isValidEnumValue(dto.getTypeProduct())) {
             throw new ProductExceptions("Invalid product type: " + dto.getTypeProduct());
         }
 
@@ -60,7 +61,7 @@ public class ProductService {
 
     // This method retrieves a product by its type from the repository
     public ResponseEntity<?> getProductByType(String typeProduct) {
-        if (isValidEnumValue(typeProduct)) {
+        if (!isValidEnumValue(typeProduct)) {
             throw new ProductExceptions("Invalid product type: " + typeProduct);
         }
 
@@ -83,7 +84,7 @@ public class ProductService {
 
 
     public ResponseEntity<?> updateProduct(long id,UpdateProductRequestDTO dto) {
-        if (isValidEnumValue(dto.getTypeProduct())) {
+        if (!isValidEnumValue(dto.getTypeProduct())) {
             throw new ProductExceptions("Invalid product type: " + dto.getTypeProduct());
         }
 
@@ -100,15 +101,15 @@ public class ProductService {
                     product.setQuantity(dto.getQuantity());
                     product.setTypeProduct(typeProduct);
                     productRepository.save(product);
-                    return ResponseEntity.ok("Product updated successfully");
+                    return ResponseEntity.ok(productid);
                 })
                 .orElseThrow(() -> new ProductExceptions("Product not found with id: " + id));
     }
 
-    public ResponseEntity<?> deleteProduct(@Valid DeleteProductRequestDTO dto) {
-        Optional<Product> product = productRepository.findById(dto.getId());
+    public ResponseEntity<?> deleteProduct( long id) {
+        Optional<Product> product = productRepository.findById(id);
         if (product.isEmpty()) {
-            throw new ProductExceptions("Product not found with id: " + dto.getId());
+            throw new ProductExceptions("Product not found with id: " + id);
         }
         productRepository.delete(product.get());
         return ResponseEntity.ok("Product deleted successfully");
@@ -117,8 +118,8 @@ public class ProductService {
 
     // This method checks if the provided value is a valid enum value for TypeProductEnum
     public boolean isValidEnumValue(String value) {
-        return Arrays.stream(EnumType.values())
-                .noneMatch(enumValue -> enumValue.name().equalsIgnoreCase(value));
+        return Arrays.stream(TypeProductEnum.values())
+                .anyMatch(enumValue -> enumValue.name().equalsIgnoreCase(value));
     }
 
 
@@ -133,6 +134,10 @@ public class ProductService {
 
     public boolean isProductAvailable(Long id, int quantity) {
         Product productId = productRepository.findQuantityById(id);
+        System.out.println("Cantidad de prosucto en la bbdd:");
+        System.out.println(productId.getQuantity());
+        System.out.println("int de cantidad a restar:");
+        System.out.println(quantity);
         if ((productId.getQuantity() - quantity) >= 0) {
             return true;
         } else {

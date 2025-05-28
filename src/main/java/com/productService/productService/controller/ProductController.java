@@ -3,18 +3,26 @@ package com.productService.productService.controller;
 import com.productService.productService.dto.CreatedProductRequestDTO;
 import com.productService.productService.dto.DeleteProductRequestDTO;
 import com.productService.productService.dto.UpdateProductRequestDTO;
+import com.productService.productService.exceptions.customExceptions.ProductExceptions;
 import com.productService.productService.model.Product;
+import com.productService.productService.repository.ProductRepository;
 import com.productService.productService.service.ProductService;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @RestController
 @RequestMapping("/api/product")
 public class ProductController {
-    private final ProductService productService;
+    private static final Logger logger = LoggerFactory.getLogger(ProductController.class);
 
-    public ProductController(ProductService productService) {
+    private final ProductService productService;
+    private final ProductRepository productRepository;
+
+    public ProductController(ProductService productService, ProductRepository productRepository) {
+        this.productRepository = productRepository;
         this.productService = productService;
     }
 
@@ -38,29 +46,33 @@ public class ProductController {
         return productService.updateProduct(id,dto);
     }
 
-    @DeleteMapping("/delete")
-    public ResponseEntity<?> deleteProduct(@RequestBody @Valid DeleteProductRequestDTO dto) {
-        return productService.deleteProduct(dto);
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<?> deleteProduct(@PathVariable long id) {
+        return productService.deleteProduct(id);
     }
 
     // this method retrieves a product by its ID
     // use by feingClient.
-    @GetMapping("/find/{id}")
+    @GetMapping("/type/{id}")
     public ResponseEntity<?> getProductById(@PathVariable Long id) {
         return productService.getProductById(id);
     }
 
-    @GetMapping("/find/{id}/{quantity}")
+    // used by FeingClient
+    @GetMapping("/{id}/{quantity}")
     public boolean isProductAvailable(@PathVariable Long id, @PathVariable int quantity) {
+        logger.info("Comprobando disponibilidad del producto con id {} y cantidad {}", id, quantity);
         return productService.isProductAvailable(id, quantity);
     }
 
     // thismethod used FeingCleint
     // sub the quantity and update the product quantity
-    @PatchMapping("/subQuantity/{id}/{quantity}")
+    @PostMapping("/subQuantity/{id}/{quantity}")
     public ResponseEntity<?> subQuantity(@PathVariable Long id, @PathVariable int quantity) {
         return productService.subQuantity(id, quantity);
     }
+
+
 
 
 
