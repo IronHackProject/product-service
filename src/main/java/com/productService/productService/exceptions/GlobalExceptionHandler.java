@@ -4,12 +4,13 @@ import com.productService.productService.exceptions.customExceptions.ProductExce
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import java.util.HashMap;
 import java.util.Map;
-
-public class GlobalExceptionHandler extends RuntimeException {
+@ControllerAdvice
+public class GlobalExceptionHandler {
     // Manejo de errores de validación de argumentos (por ejemplo, errores de @Valid)
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<?> handleValidationErrors(MethodArgumentNotValidException ex) {
